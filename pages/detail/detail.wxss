@@ -1,0 +1,42 @@
+/* pages/detail/detail.wxss */
+.content, .header {
+  width: 680rpx;
+  margin: 26rpx auto;
+  text-align: justify;
+}
+
+.header .title {
+  font-size: 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.header .subscript {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  line-height: 34rpx;
+  opacity: .7;
+}
+
+.header .subscript .info {
+  display: flex;
+}
+
+.header .subscript .info .source {
+  margin-right: 28rpx;
+}
+
+.content .image {
+  width: 100%;
+  margin: 16rpx 0;
+}
+
+.content view {
+  font-size: 32rpx;
+  line-height: 46rpx;
+  margin-bottom: 20rpx;
+}
+
+.content .strong {
+  font-weight: bold;
+}
