@@ -1,10 +1,10 @@
 <!--pages/index/index.wxml-->
 <view class='nav-bar'>
-  <view class="item {{ currentTab==index ? 'active' : '' }}" wx:for="{{ categoryList }}" data-category="{{item}}" bindtap='switchCategory'>{{ item }}</view>
+  <view class="item {{ currentTab==index ? 'active' : '' }}" wx:for="{{ categoryList }}" wx:key="*this" data-category="{{item}}" bindtap='switchCategory'>{{ item }}</view>
 </view>
 
 <view class='news-list'>
-  <view class='item' wx:for="{{ newsList }}" bindtap='showDetail' data-id="{{ item.id }}">
+  <view class='item' wx:for="{{ newsList }}" wx:key="id" bindtap='showDetail' data-id="{{ item.id }}">
     <view class='text'>
       <view class='title'>{{ item.title }}</view>
       <view class='subscript'>

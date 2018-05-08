@@ -6,12 +6,6 @@
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "一个新闻小程序",
-    "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true,
-    "backgroundColor": "#ffffff",
-    "backgroundTextStyle": "dark"
-  },
-  "networkTimeout": {
-    "request": 10000
+    "navigationBarTextStyle": "black"
   }
 }

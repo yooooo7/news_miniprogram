@@ -1,6 +1,7 @@
 // pages/index/index.js
 var app = getApp()
-const apiDomain = app.globalData.apiDomain
+const apiUrl = '/api/news/list'
+const getNewsList = app.getData
 
 // cat中英文对照
 const categoryMap = {
@@ -8,7 +9,9 @@ const categoryMap = {
   '国际': 'gj',
   '财经': 'cj',
   '娱乐': 'yl',
-  '军事': 'js'
+  '军事': 'js',
+  '体育': 'ty',
+  '其他': 'other'
 }
 
 var category
@@ -16,7 +19,7 @@ var category
 Page({
   data: {
     newsList: [],
-    categoryList: ['国内', '国际', '财经', '娱乐', '军事'],
+    categoryList: ['国内', '国际', '财经', '娱乐', '军事', '体育', '其他'],
     currentTab: 0
   },
   // 切换cat
@@ -26,7 +29,7 @@ Page({
     // 更改指定cat样式
     this.activeBar(categoryKey)
     // 获取当前cat列表
-    this.getNewsList(category)
+    getNewsList(apiUrl, category, this.setNewsList)
   },
   activeBar(categoryKey) {
     for(let i = 0; i < this.data.categoryList.length; i++) {
@@ -40,25 +43,12 @@ Page({
   },
   onLoad: function() {
     category = categoryMap[this.data.categoryList[0]]
-    this.getNewsList(category)
+    getNewsList(apiUrl, category, this.setNewsList)
   },
+  // 下拉刷新
   onPullDownRefresh: function () {
-    this.getNewsList(category, () => {
+    getNewsList(apiUrl, category, this.setNewsList ,() => {
       wx.stopPullDownRefresh()
-    })
-  },
-  getNewsList(category) {
-    wx.request({
-      url: apiDomain + '/api/news/list',
-      data: {
-        type: category
-      },
-      method: 'GET',
-      success: res => {
-        let result = res.data.result
-        // 指定list内容
-        this.setNewsList(result)
-      }
     })
   },
   setNewsList(result) {

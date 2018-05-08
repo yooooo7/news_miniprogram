@@ -1,6 +1,7 @@
 // pages/detail/detail.js
 var app = getApp()
-const apiDomain = app.globalData.apiDomain
+const apiUrl = '/api/news/detail'
+const getNewsDetail = app.getData
 
 Page({
   data: {
@@ -8,24 +9,7 @@ Page({
   },
   onLoad: function(option) {
     let id = option.id
-    this.getNewsDetail(id)
-  },
-  onPullDownRefresh: function () {
-    wx.stopPullDownRefresh()
-  },
-  // 获取文章内容
-  getNewsDetail(id) {
-    wx.request({
-      url: apiDomain + '/api/news/detail',
-      data: {
-        id: id
-      },
-      method: 'GET',
-      success: res => {
-        let result = res.data.result
-        this.setNewsDetail(result)
-      }
-    })
+    getNewsDetail(apiUrl, id, this.setNewsDetail)
   },
   // 装填数据
   setNewsDetail(result) {
@@ -34,12 +18,14 @@ Page({
     let readCount = result.readCount
     let source = result.source ? result.source : '未知来源'
     let content = result.content
-    let newsDetail ={
+    let id = result.id
+    let newsDetail = {
       title: title,
       time: time,
       readCount: readCount,
       source: source,
-      content: content
+      content: content,
+      id: id
     }
     this.setData({
       newsDetail: newsDetail
