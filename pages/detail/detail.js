@@ -9,7 +9,9 @@ Page({
   },
   onLoad: function(option) {
     let id = option.id
-    getNewsDetail(apiUrl, id, this.setNewsDetail)
+    getNewsDetail(apiUrl, id, this.setNewsDetail, () => {
+      return true
+    })
   },
   // 装填数据
   setNewsDetail(result) {
